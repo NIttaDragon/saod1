@@ -11,7 +11,7 @@ int main()
     {
       a[i]=rand()%10;
     }
-  /*while(l!=0) //сортировка пузырьком
+  while(l!=0) //сортировка пузырьком
   {
     l=0;
     for (i=1;i<m;i++)
@@ -29,7 +29,7 @@ int main()
       }
       cout<<endl;
     }
-  }*/
+  }
     for (i=0;i<m;i++)
     {
       int min=m+1;
