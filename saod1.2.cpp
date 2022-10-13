@@ -1,62 +1,50 @@
 # include <iostream>
-#include <cmath>
-#include <stdio.h>
-#include <stdlib.h>
 using namespace std;
 
-void merge(int *a, int first, int last)
-{
-  cout<<"in merge"<<endl;
-  int mid,start,final,i;
-  mid=(first+last)/2;
-  start=first;
-  final=mid+1;
-  int *mas=new int [last-first+1];
-  for(i=first;i<=last;i++)
-  {
-    if((start<=last)||(a[start]<a[final]))
-    {
-      mas[i-first]=a[start];
-      start++;
-    }
-    else
-    {
-      mas[i-first]=a[final];
-      final++;
-    }
-  }
-  for(i=first;i<=last;i++)
-    a[i]=mas[i-first];
-  delete []mas;
-};
+// пирамидальная сортировка
 
-void mergeSort(int *a,int first,int last)
+void heapify(int *arr, int m, int i)
 {
-  cout<<"in sort"<<endl;
-  if(first<last)
+  int larg = i;
+  int l = 2*i + 1;
+  int r = 2*i + 2;
+  if(l < m && arr[l] > arr[larg])
+    larg =l;
+  if(r < m && arr[r] > arr[larg])
+    larg = r;
+  if(larg != i)
   {
-    mergeSort(a,first,(first+last)/2);
-    mergeSort(a,(first+last)/2+1,last);
-    merge(a,first,last);
+    swap(arr[i], arr[larg]);
+    heapify(arr, m, larg);
+  }
+}
+
+void heap_sort(int *arr, int m)
+{
+  for (int i = m / 2 - 1; i >= 0; i--)
+    heapify(arr, m, i);
+  for (int i = m - 1; i >= 0; i--)
+  {
+    swap(arr[0], arr[i]);
+    heapify(arr, i, 0);
   }
 }
 
 int main()
 {
-  int *a=new int[100];
+  int arr[10];
   int i;
   int m=10;
   for (i=0;i<m;i++) //рандомное заполнение массива
     {
-      a[i]=rand()%10;
+      arr[i]=rand()%10;
     }
+  for(i=0;i<m;i++)
+    cout<<arr[i]<<" ";
+  cout<<endl;
+  heap_sort(arr,m);
 
   for(i=0;i<m;i++)
-    cout<<a[i]<<" ";
-  mergeSort(a,1,m);
+    cout<<arr[i]<<" ";
   cout<<endl;
-  for(i=1;i<=m;i++)
-    cout<<a[i]<<" ";
-  cout<<endl;
-  delete []a;
 }

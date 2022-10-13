@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// сортировка слиянием
+
 void merge(int *arr, int first, int last, int mid)
 {
   int i = first;
@@ -35,9 +37,7 @@ void merge(int *arr, int first, int last, int mid)
     j++;
   }
   for (i = first; i < k; i++)
-  {
     arr[i] = mas[i];
-  }
   delete []mas;
 }
 
@@ -58,9 +58,7 @@ int main()
   int arr[100000], i;
   int m=100000;
   for (i=0;i<m;i++) //рандомное заполнение массива
-    {
       arr[i]=rand()%1000;
-    }
 
   for(i=0; i<m; i++)
     cout<<arr[i]<<" ";

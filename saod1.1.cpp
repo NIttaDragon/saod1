@@ -5,41 +5,6 @@
 //#include "stdafx.h"
 using namespace std;
 
-void merge(int *a, int l, int r)
-{
-  int mid,start,final,i;
-  int *b=new int [10];
-  mid=(r+l)/2;
-  start=l;
-  final=mid+1;
-  for(i=l;i<r;i++)
-  {
-    if((start<mid)&&(final>r)||(a[start]<a[final]))
-    {
-      b[i]=a[start];
-      start++;
-    }
-    else
-    {
-      b[i]=a[final];
-      final++;
-    }
-  }
-  for(i=l;i<r;i++)
-    a[i]=b[i];
-  delete b;
-};
-
-void mergeSort(int *a,int l,int r)
-{
-  if(l<r)
-  {
-    mergeSort(a,l,(r+l)/2);
-    mergeSort(a,(r+l)/2+1,r);
-    merge(a,l,r);
-  }
-}
-
 int main()
 {
   int a[10]; int b[10];
@@ -56,9 +21,10 @@ int main()
     {
       if(a[i-1]>a[i])
       {
-        k=a[i-1];
-        a[i-1]=a[i];
-        a[i]=k;
+        swap(a[i-1], a[i]);
+        // k=a[i-1];
+        // a[i-1]=a[i];
+        // a[i]=k;
         l++;
       }
       for(int j=0;j<m;j++)
@@ -92,9 +58,10 @@ int main()
     {
       if(a[i]<a[j])
       {
-        k=a[i];
-        a[i]=a[j];
-        a[j]=k;
+        swap(a[i], a[j]);
+        // k=a[i];
+        // a[i]=a[j];
+        // a[j]=k;
       }
     }
     for(int s=0;s<m;s++)
@@ -121,9 +88,10 @@ int main()
       {*/
         /*if(a[i]>a[i+1])
         {
-          l=a[i];
-          a[i]=a[i+1];
-          a[i+1]=l;
+          swap(a[i], a[i+1]);
+          // l=a[i];
+          // a[i]=a[i+1];
+          // a[i+1]=l;
         }
       //}
     }
@@ -134,10 +102,6 @@ int main()
     cout<<endl;
     t++;
   }*/
-  for(i=0;i<m;i++)
-    cout<<a[i];
-  mergeSort(a,1,m);
-  cout<<endl;
   for(i=0;i<m;i++)
     cout<<a[i];
   cout<<endl;
