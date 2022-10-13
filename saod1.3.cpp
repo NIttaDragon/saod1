@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-void merge(int *arr, int low, int high, int mid)
+void merge(int *arr, int first, int last, int mid)
 {
-  int i = low;
-  int k = low;
+  int i = first;
+  int k = first;
   int j = mid + 1;
-  int mas[101];
-  while (i <= mid && j <= high)
+  int *mas=new int [last+1];
+  while (i <= mid && j <= last)
   {
     if (arr[i] < arr[j])
     {
@@ -28,37 +28,38 @@ void merge(int *arr, int low, int high, int mid)
     k++;
     i++;
   }
-  while (j <= high)
+  while (j <= last)
   {
     mas[k] = arr[j];
     k++;
     j++;
   }
-  for (i = low; i < k; i++)
+  for (i = first; i < k; i++)
   {
     arr[i] = mas[i];
   }
+  delete []mas;
 }
 
-void merge_sort(int *arr, int low, int high)
+void merge_sort(int *arr, int first, int last)
 {
   int mid;
-  if (low < high)
+  if (first < last)
   {
-    mid = (low + high)/2;
-    merge_sort(arr, low, mid);
-    merge_sort(arr, mid+1, high);
-    merge(arr, low, high, mid);
+    mid = (first + last)/2;
+    merge_sort(arr, first, mid);
+    merge_sort(arr, mid+1, last);
+    merge(arr, first, last, mid);
   }
 }
 
 int main()
 {
-  int arr[100], i;
-  int m=10;
+  int arr[100000], i;
+  int m=100000;
   for (i=0;i<m;i++) //рандомное заполнение массива
     {
-      arr[i]=rand()%10;
+      arr[i]=rand()%1000;
     }
 
   for(i=0; i<m; i++)
