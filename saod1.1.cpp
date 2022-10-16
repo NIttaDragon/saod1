@@ -1,108 +1,49 @@
-# include <iostream>
-#include <cmath>
-#include <stdio.h>
-#include <stdlib.h>
-//#include "stdafx.h"
+#include <iostream>
 using namespace std;
+
+// быстра сортировка
+
+void qsortRecursive(int *a, int m)
+{
+  int i = 0;
+  int j = m - 1;
+  int mid = a[m / 2];
+  do {
+    while(a[i]<mid)
+    {
+      i++;
+    }
+    while(a[j]>mid)
+    {
+      j--;
+    }
+    if (i <= j)
+    {
+      swap(a[i],a[j]);
+      i++;
+      j--;
+    }
+  } while(i <= j);
+  if(j>0)
+    qsortRecursive(a,j+1);
+  if (i<m)
+    qsortRecursive(&a[i],m-i);
+}
 
 int main()
 {
-  int a[10]; int b[10];
-  int i,j,t,k;
-  int l=1; int m=10;
+  int a[10];
+  int i;
+  int m=10;
   for (i=0;i<m;i++) //рандомное заполнение массива
     {
       a[i]=rand()%10;
     }
-  /*while(l!=0) //сортировка пузырьком
-  {
-    l=0;
-    for (i=1;i<m;i++)
-    {
-      if(a[i-1]>a[i])
-      {
-        swap(a[i-1], a[i]);
-        // k=a[i-1];
-        // a[i-1]=a[i];
-        // a[i]=k;
-        l++;
-      }
-      for(int j=0;j<m;j++)
-      {
-        cout<<a[j]<<", ";
-      }
-      cout<<endl;
-    }
-  }
-  for (i=0;i<m;i++) // сортировка выбором
-  {
-    int min=m+1;
-    for (j=i;j<m;j++)
-    {
-      if(a[j]<min)
-      {
-        min=a[j];
-        t=j;
-      }
-    }
-    if(a[i]!=min)
-    {
-      k=a[i];
-      a[i]=min;
-      a[t]=k;
-    }
-  }
-  for (i=1;i<m;i++) //сортировка вставками
-  {
-    for (j=0;j<i;j++)
-    {
-      if(a[i]<a[j])
-      {
-        swap(a[i], a[j]);
-        // k=a[i];
-        // a[i]=a[j];
-        // a[j]=k;
-      }
-    }
-    for(int s=0;s<m;s++)
-    {
-      cout<<a[s]<<", ";
-    }
-    cout<<endl;
-  }*/
-  /*k=1;
-  t=0;
-  for(int s=0;s<m;s++)
-  {
-    cout<<a[s]<<", ";
-  }
-  cout<<endl;
-  while(t<(m-1)) // сортировка слиянием
-  {
-    int n=k-1;
-    k=k*2;
-
-    for(i=0;i<m;i+=k)
-    {
-      /*for(j=1;j<m;j+=k)
-      {*/
-        /*if(a[i]>a[i+1])
-        {
-          swap(a[i], a[i+1]);
-          // l=a[i];
-          // a[i]=a[i+1];
-          // a[i+1]=l;
-        }
-      //}
-    }
-    for(int s=0;s<m;s++)
-    {
-      cout<<a[s]<<", ";
-    }
-    cout<<endl;
-    t++;
-  }*/
   for(i=0;i<m;i++)
-    cout<<a[i];
+    cout<<a[i]<<" ";
+  cout<<endl;
+  qsortRecursive(a,m);
+  for(i=0;i<m;i++)
+    cout<<a[i]<<" ";
   cout<<endl;
 }
